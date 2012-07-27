@@ -1,5 +1,5 @@
 var http = require('http'),
-    fs = require('fs');
+	fs = require('fs');
 
 //  Read existing file if it exists
 //  Parse its JSON for unique point IDs
@@ -14,7 +14,7 @@ var responseJson = '',
 		host: 'share.findmespot.com',
 		port: 80,
 		path: '/spot-adventures/rest-api/1.0/public/feed/' + process.argv[2] +
-			'/message?feedPassword=' + process.argv[3] + '&sort=timeInMili&dir=DESC',
+			'/message?feedPassword=' + process.argv[3] + '&sort=timeInMili&dir=DESC'
 	};
 
 //  Begin with a file exist check on the master list of points
@@ -36,7 +36,7 @@ fs.exists('/home/ap/dev/www/spot/spotJson.txt', function(exists) {
 		});
 
 		res.on('end', function() {
-			jsonNew = JSON.parse(responseJson);	
+			jsonNew = JSON.parse(responseJson);
 			var points = jsonNew.response.feedMessageResponse.messages.message;
 			
 			if(!points)
@@ -51,7 +51,7 @@ fs.exists('/home/ap/dev/www/spot/spotJson.txt', function(exists) {
 				}
 			}
 
-			fs.writeFile('/home/ap/dev/www/spot/spotJson.txt', JSON.stringify(jsonMaster));
+			fs.writeFileSync('/home/ap/dev/www/spot/spotJson.txt', JSON.stringify(jsonMaster));
 		});
 	});
 
