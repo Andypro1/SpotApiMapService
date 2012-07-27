@@ -25,7 +25,7 @@ fs.exists('/home/ap/dev/www/spot/spotJson.txt', function(exists) {
 		});
 	}
 
-	//  Perform an http request from the spot rest-api, compare
+	//  Perform an http request from the spot rest api, compare
 	//  the list of points to the master list in the jsonMaster object,
 	//  then write the new master list back to the file
 	var req = http.get(options, function(res) {
