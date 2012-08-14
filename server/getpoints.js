@@ -37,6 +37,14 @@ fs.exists('/home/ap/dev/www/spot/spotJson.txt', function(exists) {
 
 		res.on('end', function() {
 			jsonNew = JSON.parse(responseJson);
+
+			if(!(jsonNew && jsonNew.response && jsonNew.response.feedMessageResponse &&
+				jsonNew.response.feedMessageResponse.messages)) {
+				console.log(jsonNew);
+				fs.writeFileSync('/home/ap/dev/www/spot/spotJson.txt', JSON.stringify(jsonMaster));
+				return;
+			}
+
 			var points = jsonNew.response.feedMessageResponse.messages.message;
 			
 			if(!points)
