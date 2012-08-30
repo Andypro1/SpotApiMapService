@@ -3,14 +3,35 @@
 	<head>
 		<title>Manage SPOT Points</title>
 	</head>
-	<body>
-		<header>Header</header>
+	<body style="display: none;">
+		<header>Manage Points</header>
+		<section id="addpoint">
+			<form data-bind="submit: addPoint">
+			    <label for="lat">Add point:</label>
+			    <label for="lat">Latitude:</label>
+			    <input data-bind="value: newLatitude" placeholder="- enter latitude -" />
+			    <label for="long">Longitude:</label>
+			    <input data-bind="value: newLongitude" placeholder="- enter longitude -" />
+			    <label for="time">Date/Time:</label>
+			    <input type="date" data-bind="value: newDateTime" placeholder="- enter date/time -" />
+			    <button type="submit">Add</button>
+			</form>
+		</section>
 		<section id="points">
-			<ul class="points">
-				<li>Existing Point</li>
+			<ul data-bind="foreach: points, visible: points().length > 0" class="points">
+			    <li>
+			        <input data-bind="value: latitude, disable: true" />
+			        <input data-bind="value: longitude, disable: true" />
+			        <input data-bind="value: dateTime, disable: true" />
+			        <a href="#" data-bind="click: $parent.removePoint">Delete</a>
+			    </li>
 			</ul>
 		</section>
-		<footer>Footer</footer>
+		<footer>
+			You have <b data-bind="text: newPointsCount().length"></b> Spot points
+
+			<button data-bind="click: save">Save</button>
+		</footer>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script src="/knockout-2.1.0.js"></script>
 		<script src="/points.js"></script>
